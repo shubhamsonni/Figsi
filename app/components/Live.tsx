@@ -49,8 +49,8 @@ const handlePointerDown = useCallback((event:React.
   onPointerDown={handlePointerDown}
   className="relative bg-[#0b1220] overflow-hidden"
   style={{
-    width: 1440,
-    height: 900,
+    width: 1280,
+    height: 665,
     margin: "0 auto",
   }}
 >
