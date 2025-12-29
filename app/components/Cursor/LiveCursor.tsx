@@ -1,3 +1,4 @@
+
 import { LiveCursorProps } from "@/types/type"
 import { COLORS } from "@/constants";
 import Cursor from "./Cursor";
