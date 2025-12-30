@@ -21,7 +21,12 @@ const Live = () => {
 
     const broadcast= useBroadcastEvent();
 
-    useInterval(()=>{
+useInterval(()=>{
+    setReaction((reaction)=>reaction.filter((r)=>r.
+    timestamp > Date.now()-4000))
+},1000)
+
+useInterval(()=>{
         if(cursorState.mode===CursorMode.Reaction &&
             cursorState.isPressed && cursor){
                 setReaction((reactions) => reactions.concat([
@@ -38,9 +43,9 @@ const Live = () => {
                     value:cursorState.reaction,
                 })
             }
-    },100)
+},100)
 
-    useEventListener((eventData)=>{
+useEventListener((eventData)=>{
         const event = eventData.event as ReactionEvent;
 
             setReaction((reactions) => reactions.concat([
@@ -50,7 +55,7 @@ const Live = () => {
             timestamp:Date.now()
         }
     ]))
-    })
+})
 
   const containerRef = useRef<HTMLDivElement>(null);
 
