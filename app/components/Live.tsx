@@ -1,12 +1,18 @@
 "use client"
 
 import { useMyPresence, useOthers } from "@liveblocks/react";
-import { useCallback, useRef } from "react";
+import { useCallback, useRef, useState } from "react";
 import LiveCursor from "./Cursor/LiveCursor";
+import CursorChat from "./Cursor/CursorChat";
+import { CursorMode } from "@/types/type";
 
 const Live = () => {
     const others = useOthers();
     const [{ cursor }, updateMyPresence] = useMyPresence() as any;
+
+    const[cursorState , setCursorState] = useState({
+        mode: CursorMode .Hidden
+    })
 
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -25,7 +31,7 @@ const handlePointerMove = useCallback((event:React.
 
 const handlePointerLeave = useCallback((event:React.
     PointerEvent)=>{
-        event.preventDefault();
+       setCursorState({ mode: CursorMode.Hidden})
 
         updateMyPresence({cursor:null , message:null})
 },[])
@@ -58,6 +64,15 @@ const handlePointerDown = useCallback((event:React.
 <h1 className="absolute inset-0 flex items-center justify-center text-2xl text-white">
   Liveblocks Figma Clone
 </h1>
+
+{cursor &&(
+    <CursorChat
+    cursor={cursor}
+    cursorState={cursorState}
+    setCursorState={setCursorState}
+    updateMyPresence={updateMyPresence}
+    />
+)}
 
         <LiveCursor others={others}/>
     </div>
