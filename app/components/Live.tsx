@@ -57,7 +57,7 @@ useEventListener((eventData)=>{
     ]))
 })
 
-  const containerRef = useRef<HTMLDivElement>(null);
+const containerRef = useRef<HTMLDivElement>(null);
 
 
 const handlePointerMove = useCallback((event:React.
@@ -75,12 +75,14 @@ const handlePointerMove = useCallback((event:React.
             }
 },[])
 
+
 const handlePointerLeave = useCallback((event:React.
     PointerEvent)=>{
        setCursorState({ mode: CursorMode.Hidden})
 
         updateMyPresence({cursor:null , message:null})
 },[])
+
 
 const handlePointerDown = useCallback((event: React.PointerEvent) => {
   const x =
@@ -109,7 +111,6 @@ const handlePointerUp = useCallback(
         : state
     );
   },[cursorState.mode, setCursorState]);
-
 
 
 useEffect(()=>{
