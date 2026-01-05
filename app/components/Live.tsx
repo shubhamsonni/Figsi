@@ -168,9 +168,7 @@ const setReactions= useCallback((reaction:string)=>
   }}
 >
 
-<h1 className="absolute inset-0 flex items-center justify-center text-2xl text-white">
-  Liveblocks Figma Clone
-</h1>
+<canvas />
 
 {reaction.map((r)=>(
     <FlyingReaction
