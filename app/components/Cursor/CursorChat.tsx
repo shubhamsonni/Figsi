@@ -16,7 +16,6 @@ const handleChange=(e: React.ChangeEvent<HTMLInputElement>)=>{
 
     })
 }
-
 const handleKeyDown = (e:React.KeyboardEvent<HTMLInputElement>)=>{
     if(e.key==='Enter'){
 setCursorState({
@@ -40,7 +39,8 @@ setCursorState({
 
             <div className="absolute left-2 top-5
             bg-blue-500 px-4 py-2 text-sm leading-relaxed 
-            text-white rounded-[20px]">
+            text-white rounded-[20px]"
+            onKeyUp={(e)=>e.stopPropagation()}>
             {cursorState.previousMessage &&(
                 <div>{cursorState.previousMessage}</div>
             )}
