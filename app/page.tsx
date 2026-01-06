@@ -37,7 +37,7 @@ export default function Page() {
 
     canvas.on("mouse:down", mouseDownHandler);
 
-    const resizeHandler = () => handleResize({ fabricRef });
+    const resizeHandler = () => handleResize({ canvas });
     window.addEventListener("resize", resizeHandler);
 
     return () => {
