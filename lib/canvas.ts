@@ -367,6 +367,7 @@ export const handleResize = ({ canvas }: { canvas: Canvas | null }) => {
     width: parent.clientWidth,
     height: parent.clientHeight,
   });
+  canvas.renderAll();
 };
 
 // zoom canvas on mouse scroll

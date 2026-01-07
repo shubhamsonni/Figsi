@@ -19,13 +19,13 @@ export default function Page() {
 
   const isDrawing = useRef(false);
   const shapeRef = useRef<FabricObject | null>(null);
-  const selectedShapeRef = useRef<string | null>(null);
+  const selectedShapeRef = useRef<string | null>("rectangle");
 
   useEffect(() => {
     const canvas = initializeFabric({ canvasRef, fabricRef });
     if (!canvas) return;
 
-    const mouseDownHandler = (options: any) => {
+    const mouseDownHandler = (options) => {
       handleCanvasMouseDown({
         options,
         canvas,
@@ -52,7 +52,7 @@ export default function Page() {
       <Navbar />
       <section className="flex h-[calc(100vh-64px)] flex-row">
         <LeftSideBar />
-        <Live />
+        <Live canvasRef={canvasRef} />
         <RightSideBar />
       </section>
     </main>

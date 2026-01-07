@@ -9,7 +9,11 @@ import ReactionSelector from "./reaction/ReactionButton";
 import FlyingReaction from "./reaction/FlyingReaction";
 import useInterval from "@/hooks/useInterval";
 
-const Live = () => {
+type Props = {
+    canvasRef: React.MutableRefObject<HTMLCanvasElement | null>;
+}
+
+const Live = ({canvasRef}: Props) => {
     const others = useOthers();
     const [{ cursor }, updateMyPresence] = useMyPresence() as any;
 
@@ -155,20 +159,19 @@ const setReactions= useCallback((reaction:string)=>
   return (
 
 <div
+  id="canvas"
   ref={containerRef}
   onPointerMove={handlePointerMove}
   onPointerLeave={handlePointerLeave}
   onPointerDown={handlePointerDown}
   onPointerUp={handlePointerUp}
-  className="relative bg-[#0b1220] overflow-hidden"
-  style={{
-    width: 1280,
-    height: 665,
-    margin: "0 auto",
-  }}
+  className="relative flex-1 bg-[#0b1220] overflow-none"
+
 >
 
-<canvas />
+<canvas ref={canvasRef}
+className="absolute inset-0 w-full h-full"
+ />
 
 {reaction.map((r)=>(
     <FlyingReaction
