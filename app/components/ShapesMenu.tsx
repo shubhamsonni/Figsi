@@ -20,7 +20,7 @@ const ShapesMenu = ({
     <>
       <DropdownMenu>
         <DropdownMenuTrigger asChild className="no-ring">
-          <Button  className="relative h-5 w-5 object-contain" onClick={() => handleActiveElement(item)}>
+          <Button  className="relative h-5 w-5 object-contain bg-black" onClick={() => handleActiveElement(item)}>
             <Image
               src={isDropdownElem ? activeElement.icon : item.icon}
               alt={item.name}
@@ -47,10 +47,10 @@ const ShapesMenu = ({
                   alt={elem?.name as string}
                   width={20}
                   height={20}
-                  className={activeElement.value === elem?.value ? "" : ""}
+                  className={activeElement.value === elem?.value ? "bg-black" : ""}
                 />
                 <p
-                  className={`text-sm  ${
+                  className={`text-sm   ${
                     activeElement.value === elem?.value ? "text-black " : "text-white "
                   }`}
                 >
