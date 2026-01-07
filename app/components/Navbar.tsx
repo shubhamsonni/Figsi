@@ -17,10 +17,10 @@ const Navbar = ({ activeElement, imageInputRef, handleImageUpload, handleActiveE
     (Array.isArray(value) && value.some((val) => val?.value === activeElement?.value));
 
   return (
-    <nav className="flex select-none items-center justify-between gap-4 bg-primary-black px-5 text-white">
+    <nav className="flex select-none items-center justify-between gap-4 bg-black px-5 text-white">
       <Image src="/assets/logo.svg" alt="FigPro Logo" width={58} height={20} />
 
-      <ul className="flex flex-row">
+      <ul className="flex flex-row ">
         {navElements.map((item: ActiveElement | any) => (
           <li
             key={item.name}
@@ -29,7 +29,7 @@ const Navbar = ({ activeElement, imageInputRef, handleImageUpload, handleActiveE
               handleActiveElement(item);
             }}
             className={`group px-2.5 py-5 flex justify-center items-center
-            ${isActive(item.value) ? "bg-primary-green" : "hover:bg-primary-grey-200"}
+            ${isActive(item.value) ? "bg-green-500 " : "hover:bg-gray-800"}
             `}
           >
             {/* If value is an array means it's a nav element with sub options i.e., dropdown */}
@@ -44,12 +44,12 @@ const Navbar = ({ activeElement, imageInputRef, handleImageUpload, handleActiveE
             ) : item?.value === "comments" ? (
               // If value is comments, trigger the NewThread component
               <NewThread>
-                <Button variant="outline" className="relative w-5 h-5 object-contain">
+                <Button className="relative w-5 h-5 object-contain">
                   <Image
                     src={item.icon}
                     alt={item.name}
                     fill
-                    className={isActive(item.value) ? "invert" : ""}
+                    className={isActive(item.value) ? "" : ""}
                   />
                 </Button>
               </NewThread>
@@ -59,7 +59,7 @@ const Navbar = ({ activeElement, imageInputRef, handleImageUpload, handleActiveE
                   src={item.icon}
                   alt={item.name}
                   fill
-                  className={isActive(item.value) ? "invert" : ""}
+                  className={isActive(item.value) ? "" : ""}
                 />
               </Button>
             )}
