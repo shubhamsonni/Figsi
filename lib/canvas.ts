@@ -319,25 +319,24 @@ export const renderCanvas = ({
   activeObjectRef,
 }: RenderCanvas) => {
   const canvas = fabricRef.current;
-  if (!canvas) return;
+  if (!canvas || !canvasObjects) return;
 
   canvas.clear();
 
-  Array.from(canvasObjects, async ([objectId, objectData]) => {
-    const enlivenedObjects = await util.enlivenObjects([
-      objectData,
-    ]);
+  for (const [objectId, objectData] of canvasObjects.entries()) {
+    util.enlivenObjects([objectData]).then((enlivenedObjects) => {
+      enlivenedObjects.forEach((obj) => {
+        if (activeObjectRef.current?.objectId === objectId) {
+          canvas.setActiveObject(obj);
+        }
+        canvas.add(obj);
+      });
 
-    enlivenedObjects.forEach((obj) => {
-      if (activeObjectRef.current?.objectId === objectId) {
-        canvas.setActiveObject(obj);
-      }
-      canvas.add(obj);
+      canvas.renderAll();
     });
-
-    canvas.renderAll();
-  });
+  }
 };
+
 
 
 // resize canvas dimensions on window resize
