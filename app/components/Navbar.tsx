@@ -49,7 +49,7 @@ const Navbar = ({ activeElement, imageInputRef, handleImageUpload, handleActiveE
                     src={item.icon}
                     alt={item.name}
                     fill
-                    className={isActive(item.value) ? "" : ""}
+                    className={isActive(item.value) ? " " : ""}
                   />
                 </Button>
               </NewThread>
