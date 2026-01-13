@@ -7,10 +7,6 @@ import { v4 as uuidv4 } from "uuid";
 
 import { CustomFabricObject } from "@/types/type";
 
-/* -------------------------------------------------------------------------- */
-/*                                   COPY                                     */
-/* -------------------------------------------------------------------------- */
-
 export const handleCopy = (canvas: Canvas) => {
   const activeObjects = canvas.getActiveObjects();
 
@@ -21,10 +17,6 @@ export const handleCopy = (canvas: Canvas) => {
 
   return activeObjects;
 };
-
-/* -------------------------------------------------------------------------- */
-/*                                   PASTE                                    */
-/* -------------------------------------------------------------------------- */
 
 export const handlePaste = (
   canvas: Canvas,
@@ -66,10 +58,6 @@ export const handlePaste = (
   }
 };
 
-/* -------------------------------------------------------------------------- */
-/*                                   DELETE                                   */
-/* -------------------------------------------------------------------------- */
-
 export const handleDelete = (
   canvas: Canvas,
   deleteShapeFromStorage: (id: string) => void
@@ -88,10 +76,6 @@ export const handleDelete = (
   canvas.discardActiveObject();
   canvas.requestRenderAll();
 };
-
-/* -------------------------------------------------------------------------- */
-/*                                 KEY EVENTS                                 */
-/* -------------------------------------------------------------------------- */
 
 export const handleKeyDown = ({
   e,
