@@ -20,6 +20,7 @@ import Navbar from "./components/Navbar";
 import { useMutation, useStorage } from "@liveblocks/react";
 import { LiveMap } from "@liveblocks/client";
 import { defaultNavElement } from "@/constants";
+import { handleDelete } from "@/lib/key-events";
 
 export default function Page() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -71,6 +72,18 @@ const deleteAllShapes = useMutation(
     return canvasObjects.size === 0;
   },[]);
 
+
+const deleteShapeFromStorage = useMutation(
+  ({ storage }, objectId) => {
+    const canvasObjects = storage.get("canvasObjects");
+
+    if (!(canvasObjects instanceof LiveMap)) return;
+
+    canvasObjects.delete(objectId);
+  },
+  []
+);
+
   const handleActiveElement = (elem: ActiveElement) => {
     setActiveElement(elem);
 
@@ -80,6 +93,10 @@ const deleteAllShapes = useMutation(
         fabricRef.current?.clear();
         setActiveElement(defaultNavElement)
         break;
+      case 'delete':
+        handleDelete(fabricRef.current as any,
+          deleteShapeFromStorage)
+        setActiveElement(defaultNavElement)
     
       default:
         break;
