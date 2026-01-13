@@ -48,7 +48,7 @@ export function generateRandomName(): string {
 
 export const getShapeInfo = (shapeType: string) => {
   switch (shapeType) {
-    case "rect":
+    case "rectangle":
       return {
         icon: "/assets/rectangle.svg",
         name: "Rectangle",

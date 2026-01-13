@@ -36,7 +36,6 @@ export const handlePaste = (
     parsedObjects.forEach((objData: any) => {
       util.enlivenObjects([objData]).then((enlivenedObjects) => {
         enlivenedObjects.forEach((obj) => {
-          // ✅ TYPE NARROWING (THIS FIXES ALL `top/left/set` ERRORS)
           const fabricObj = obj as FabricObject & CustomFabricObject<any>;
 
           fabricObj.set({
