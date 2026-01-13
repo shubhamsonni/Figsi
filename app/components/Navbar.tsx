@@ -29,7 +29,7 @@ const Navbar = ({ activeElement, imageInputRef, handleImageUpload, handleActiveE
               handleActiveElement(item);
             }}
             className={`group px-2.5 py-5 flex justify-center items-center
-            ${isActive(item.value) ? "bg-green-500 hover:bg-green-700 " : "hover:bg-gray-800"}
+            ${isActive(item.value) ? "bg-green-500 hover:bg-green-800 " : "hover:bg-gray-800"}
             `}
           >
             {/* If value is an array means it's a nav element with sub options i.e., dropdown */}

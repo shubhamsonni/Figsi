@@ -92,7 +92,7 @@ export const getShapeInfo = (shapeType: string) => {
 
     default:
       return {
-        icon: "/assets/rectangle.svg",
+        icon: `/assets/${shapeType}.svg` ,
         name: shapeType,
       };
   }
