@@ -19,6 +19,7 @@ import LeftSidebar from "./components/LeftSidebar";
 import Navbar from "./components/Navbar";
 import { useMutation, useStorage } from "@liveblocks/react";
 import { LiveMap } from "@liveblocks/client";
+import { defaultNavElement } from "@/constants";
 
 export default function Page() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -55,8 +56,34 @@ const syncShapeInStorage = useMutation(
     icon:'',
   })
 
+const deleteAllShapes = useMutation(
+  ({ storage }) => {
+    const canvasObjects = storage.get("canvasObjects");
+
+    if (!(canvasObjects instanceof LiveMap) || canvasObjects.size === 0) 
+      return true;
+    
+
+    for (const [key,value] of canvasObjects.entries()) {
+      canvasObjects.delete(key);
+    }
+
+    return canvasObjects.size === 0;
+  },[]);
+
   const handleActiveElement = (elem: ActiveElement) => {
     setActiveElement(elem);
+
+    switch (elem?.value) {
+      case 'reset':
+        deleteAllShapes()
+        fabricRef.current?.clear();
+        setActiveElement(defaultNavElement)
+        break;
+    
+      default:
+        break;
+    }
 
     selectedShapeRef.current = elem?.value as string;
   }
