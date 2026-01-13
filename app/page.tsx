@@ -28,7 +28,7 @@ export default function Page() {
 
   const isDrawing = useRef(false);
   const shapeRef = useRef<FabricObject | null>(null);
-  const selectedShapeRef = useRef<string | null>("");
+  const selectedShapeRef = useRef<string | null>("rectangle");
 
   const activeObjectRef = useRef<FabricObject | null>(null);
 
