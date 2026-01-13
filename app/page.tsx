@@ -17,18 +17,21 @@ import {
 import { ActiveElement } from "@/types/type";
 import LeftSidebar from "./components/LeftSidebar";
 import Navbar from "./components/Navbar";
-import { useMutation, useStorage } from "@liveblocks/react";
+import { useMutation, useRedo, useStorage, useUndo } from "@liveblocks/react";
 import { LiveMap } from "@liveblocks/client";
 import { defaultNavElement } from "@/constants";
-import { handleDelete } from "@/lib/key-events";
+import { handleDelete, handleKeyDown } from "@/lib/key-events";
 
 export default function Page() {
+  const undo = useUndo();
+  const redo = useRedo();
+
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const fabricRef = useRef<Canvas | null>(null);
 
   const isDrawing = useRef(false);
   const shapeRef = useRef<FabricObject | null>(null);
-  const selectedShapeRef = useRef<string | null>("rectangle");
+  const selectedShapeRef = useRef<string | null>(null);
 
   const activeObjectRef = useRef<FabricObject | null>(null);
 
@@ -109,7 +112,7 @@ const deleteShapeFromStorage = useMutation(
     const canvas = initializeFabric({ canvasRef, fabricRef });
     if (!canvas) return;
 
-    const mouseDownHandler = (options ) => {
+    const mouseDownHandler = (options: any ) => {
       handleCanvasMouseDown({
         options,
         canvas,
@@ -120,7 +123,7 @@ const deleteShapeFromStorage = useMutation(
     };
     canvas.on("mouse:down", mouseDownHandler);
 
-    const mouseMoveHandler = (options ) => {
+    const mouseMoveHandler = (options: any ) => {
       handleCanvaseMouseMove({
         options,
         canvas,
@@ -132,7 +135,7 @@ const deleteShapeFromStorage = useMutation(
     };
     canvas.on("mouse:move", mouseMoveHandler);
 
-    const mouseUpHandler = (options ) => {
+    const mouseUpHandler = () => {
       handleCanvasMouseUp({
         canvas,
         isDrawing,
@@ -146,7 +149,7 @@ const deleteShapeFromStorage = useMutation(
     canvas.on("mouse:up", mouseUpHandler);
     
     
-    const objectModifiedHandler = (options ) => {
+    const objectModifiedHandler = (options: any ) => {
           handleCanvasObjectModified({
             options,
             syncShapeInStorage,
@@ -154,9 +157,20 @@ const deleteShapeFromStorage = useMutation(
     };
     canvas.on("object:modified", objectModifiedHandler);
 
-
+ 
     const resizeHandler = () => handleResize({ canvas });
     window.addEventListener("resize", resizeHandler);
+
+    window.addEventListener("keydown", (e: any) =>{
+      handleKeyDown({
+        canvas: fabricRef.current as any,
+        e,
+        undo,
+        redo,
+        deleteShapeFromStorage,
+        syncShapeInStorage
+      })
+    })
 
     return () => {
       canvas.off("mouse:down", mouseDownHandler);
