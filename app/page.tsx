@@ -195,7 +195,7 @@ const deleteShapeFromStorage = useMutation(
       <Navbar
         activeElement={activeElement}
         handleActiveElement={handleActiveElement}
-      />
+      />  
       <section className="flex h-[calc(100vh-64px)] flex-row">
 <LeftSidebar
   allShapes={canvasObjects ? Array.from(canvasObjects.values()) : []}
