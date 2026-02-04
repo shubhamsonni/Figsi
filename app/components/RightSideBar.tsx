@@ -1,7 +1,7 @@
 import React, { useMemo, useRef } from "react";
 
 import { RightSidebarProps } from "@/types/type";
-import { bringElement, modifyShape } from "@/lib/shapes";
+import { modifyShape } from "@/lib/shapes";
 
 import Text from "./settings/Text";
 import Color from "./settings/Color";
@@ -36,7 +36,7 @@ const RightSidebar = ({
   // memoize the content of the right sidebar to avoid re-rendering on every mouse actions
   const memoizedContent = useMemo(
     () => (
-      <section className="flex flex-col border-t border-primary-grey-200 bg-black text-gray-300 min-w-56.75 sticky right-0 h-full max-sm:hidden select-none">
+      <section className="flex flex-col border-t border-gray-800 bg-black text-gray-300 min-w-56.75 sticky right-0 h-full max-sm:hidden select-none">
         <h3 className=" px-5 pt-4 text-xs uppercase">Design</h3>
         <span className="text-xs text-gray-300 mt-3 px-5 border-b border-gray-700 pb-4">
           Make changes to canvas as you like

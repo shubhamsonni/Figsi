@@ -237,7 +237,7 @@ const deleteShapeFromStorage = useMutation(
       />  
       <section className="flex h-[calc(100vh-64px)] flex-row">
 <LeftSidebar
-  allShapes={canvasObjects ? Array.from(canvasObjects.values()) : []}
+  allShapes={canvasObjects instanceof LiveMap ? Array.from(canvasObjects.values()) : []}
 />
         <Live canvasRef={canvasRef} />
         <RightSideBar 
