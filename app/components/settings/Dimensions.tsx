@@ -1,5 +1,6 @@
-import { Label } from "../ui/label";
-import { Input } from "../ui/input";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+
 
 const dimensionsOptions = [
   { label: "W", property: "width" },
@@ -31,8 +32,8 @@ const Dimensions = ({ width, height, isEditingRef, handleInputChange }: Props) =
             value={item.property === "width" ? width : height}
             className='input-ring'
             min={10}
-            onChange={(e) => handleInputChange(item.property, e.target.value)}
-            onBlur={(e) => {
+            onChange={(e:any) => handleInputChange(item.property, e.target.value)}
+            onBlur={(e:any) => {
               isEditingRef.current = false
             }}
           />

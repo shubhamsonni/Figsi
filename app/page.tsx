@@ -21,6 +21,7 @@ import { useMutation, useRedo, useStorage, useUndo } from "@liveblocks/react";
 import { LiveMap } from "@liveblocks/client";
 import { defaultNavElement } from "@/constants";
 import { handleDelete, handleKeyDown } from "@/lib/key-events";
+import { handleImageUpload } from "@/lib/shapes";
 
 export default function Page() {
   const undo = useUndo();
@@ -34,6 +35,7 @@ export default function Page() {
   const selectedShapeRef = useRef<string | null>(null);
 
   const activeObjectRef = useRef<FabricObject | null>(null);
+  const imageInputRef = useRef<HTMLInputElement>(null);
 
   const canvasObjects = useStorage((root)=> root.canvasObjects)
 
@@ -100,7 +102,15 @@ const deleteShapeFromStorage = useMutation(
         handleDelete(fabricRef.current as any,
           deleteShapeFromStorage)
         setActiveElement(defaultNavElement)
-    
+        break;
+      case 'image':
+        imageInputRef.current?.click();
+        isDrawing.current = false;
+        if(fabricRef.current){
+          fabricRef.current.isDrawingMode = false;
+        }
+        break;
+
       default:
         break;
     }
@@ -195,6 +205,17 @@ const deleteShapeFromStorage = useMutation(
       <Navbar
         activeElement={activeElement}
         handleActiveElement={handleActiveElement}
+        imageInputRef={imageInputRef}
+        handleImageUpload={(e:any)=>{
+          e.stopPropagation();
+
+          handleImageUpload({
+            file: e.target.files[0],
+            canvas: fabricRef as any,
+            syncShapeInStorage,
+            shapeRef
+          })
+        }}
       />  
       <section className="flex h-[calc(100vh-64px)] flex-row">
 <LeftSidebar

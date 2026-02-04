@@ -4,13 +4,12 @@ import {
   fontWeightOptions,
 } from "@/constants";
 
-import {
-  Select,
-  SelectContent,
+import { Select,
+    SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../ui/select";
+ } from "@/components/ui/select";
 
 const selectConfigs = [
   {
