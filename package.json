@@ -16,6 +16,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "fabric": "^6.9.1",
+    "jspdf": "^4.1.0",
     "lucide-react": "^0.562.0",
     "next": "16.0.10",
     "postcss": "^8.5.6",
@@ -27,6 +28,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.18",
+    "@types/fabric": "^5.3.11",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

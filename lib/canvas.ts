@@ -259,7 +259,7 @@ export const handleCanvasSelectionCreated = ({
   setElementAttributes,
 }: CanvasSelectionCreated) => {
   if (isEditingRef.current) return;
-  if (!options?.selected) return;
+  if (!(options as any)?.selected) return;
 
   const selectedElement = options.selected[0] as FabricObject;
 
@@ -327,9 +327,9 @@ export const renderCanvas = ({
     util.enlivenObjects([objectData]).then((enlivenedObjects) => {
       enlivenedObjects.forEach((obj) => {
         if (activeObjectRef.current?.objectId === objectId) {
-          canvas.setActiveObject(obj);
+          canvas.setActiveObject(obj as any);
         }
-        canvas.add(obj);
+        canvas.add(obj as any);
       });
 
       canvas.renderAll();
