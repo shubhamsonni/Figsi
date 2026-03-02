@@ -10,6 +10,7 @@ import {
   handleCanvasMouseDown,
   handleCanvasMouseUp,
   handleCanvasObjectModified,
+  handleCanvasObjectScaling,
   handleCanvasSelectionCreated,
   handleResize,
   initializeFabric,
@@ -65,8 +66,7 @@ const syncShapeInStorage = useMutation(
     if (!(canvasObjects instanceof LiveMap)) return;
 
     canvasObjects.set(objectId, shapeData);
-  },
-  []
+  },[]
 );
   const [activeElement, setActiveElement] = useState<ActiveElement>({
     name:'',
@@ -78,7 +78,7 @@ const deleteAllShapes = useMutation(
   ({ storage }) => {
     const canvasObjects = storage.get("canvasObjects");
 
-    if (!(canvasObjects instanceof LiveMap) || canvasObjects.size === 0) 
+    if (!(canvasObjects instanceof LiveMap) || canvasObjects.size === 0)
       return true;
     
 
@@ -95,7 +95,6 @@ const deleteShapeFromStorage = useMutation(
     const canvasObjects = storage.get("canvasObjects");
 
     if (!(canvasObjects instanceof LiveMap)) return;
-
     canvasObjects.delete(objectId);
   },
   []
@@ -187,6 +186,13 @@ const deleteShapeFromStorage = useMutation(
     });
   })
  
+  canvas.on("object:scaling",(options:any)=>{
+    handleCanvasObjectScaling({
+      options,setElementAttributes
+    })
+  })
+
+
     const resizeHandler = () => handleResize({ canvas });
     window.addEventListener("resize", resizeHandler);
 
@@ -235,15 +241,15 @@ const deleteShapeFromStorage = useMutation(
             shapeRef
           })
         }}
-      />  
+      />
       <section className="flex h-[calc(100vh-64px)] flex-row">
 <LeftSidebar
   allShapes={canvasObjects ? Array.from(canvasObjects.values()) : []}
 />
         <Live canvasRef={canvasRef} />
-        <RightSideBar 
+        <RightSideBar
           elementAttributes={elementAttributes}
-          setElementAttributes={setElementAttributes} 
+          setElementAttributes={setElementAttributes}
           fabricRef={fabricRef}
           isEditingRef={isEditingRef}
           activeObjectRef={activeObjectRef}
