@@ -1,4 +1,4 @@
-import { Label } from "@/components/ui/label";
+import { Label } from "@/app/components/ui/label";
 
 type Props = {
   inputRef: any;

@@ -2,17 +2,18 @@ import type { Metadata } from "next";
 import { Work_Sans } from "next/font/google";
 import "./globals.css";
 import { Room } from "./Room";
+import { TooltipProvider } from "@/app/components/ui/tooltip"; // 👈 ADD THIS
 
 const workSans = Work_Sans({
   variable: "--font-work-sans",
   subsets: ["latin"],
-  weight:['400','600','700']
+  weight: ["400", "600", "700"],
 });
-
 
 export const metadata: Metadata = {
   title: "Figsi",
-  description: "A minimalist Figma clone using Fabris.js and Liveblocks for real-time collaboration",
+  description:
+    "A minimalist Figma clone using Fabris.js and Liveblocks for real-time collaboration",
 };
 
 export default function RootLayout({
@@ -22,12 +23,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${workSans.className} bg-gray-900 `}
-      >
-        <Room>
-           {children}
-        </Room>
+      <body className={`${workSans.className} bg-gray-900`}>
+        <TooltipProvider delayDuration={0}>
+          <Room>{children}</Room>
+        </TooltipProvider>
       </body>
     </html>
   );
