@@ -124,7 +124,7 @@ useEffect(()=>{
             setCursorState({
                 mode:CursorMode.Chat,
                 previousMessage :null,
-                messge:''
+                message:""
             })
         } else if(e.key==='Escape'){
             updateMyPresence({message:''})
